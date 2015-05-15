@@ -7,6 +7,41 @@
     <groupId>org.vizun</groupId>
     <artifactId>vClient</artifactId>
     <version>0.1-SNAPSHOT</version>
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.googlecode.mavennatives</groupId>
+                    <artifactId>maven-nativedependencies-plugin</artifactId>
+                    <version>0.0.5</version>
+                    <executions>
+                        <execution>
+                            <id>unpacknatives</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>copy</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
     <dependencies>
         <dependency>
@@ -17,7 +52,12 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.</version>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl.lwjgl</groupId>
+            <artifactId>lwjgl</artifactId>
+            <version>2.8.4</version>
         </dependency>
     </dependencies>
 
