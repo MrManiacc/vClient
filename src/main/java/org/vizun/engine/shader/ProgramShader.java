@@ -1,4 +1,4 @@
-package com.vizun.engine.shader;
+package org.vizun.engine.shader;
 
 /**
  * Created by James on 5/15/2015.

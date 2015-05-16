@@ -1,4 +1,4 @@
-package com.vizun.engine.util;
+package org.vizun.engine.util;
 
 /**
  * Created by James on 5/15/2015.
