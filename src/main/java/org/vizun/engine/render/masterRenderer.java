@@ -1,4 +1,4 @@
-package com.vizun.engine.render;
+package org.vizun.engine.render;
 
 /**
  * Created by James on 5/15/2015.

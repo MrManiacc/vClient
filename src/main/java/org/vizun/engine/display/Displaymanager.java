@@ -1,4 +1,4 @@
-package com.vizun.engine.display;
+package org.vizun.engine.display;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;

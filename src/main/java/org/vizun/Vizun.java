@@ -1,6 +1,6 @@
-package com.vizun;
+package org.vizun;
 
-import com.vizun.engine.display.Displaymanager;
+import org.vizun.engine.display.Displaymanager;
 
 /**
  * Created by jamesraynor on 5/14/15.
