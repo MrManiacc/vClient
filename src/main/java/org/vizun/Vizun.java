@@ -8,6 +8,7 @@ import org.lwjgl.opengl.Display;
  * Created by jamesraynor on 5/14/15.
  */
 public class Vizun {
+    
     public static Displaymanager displayManager;
 
     public static void main(String[] args){
