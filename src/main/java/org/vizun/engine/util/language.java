@@ -10,9 +10,12 @@ public class language {
     public language(Configuration config){
         this.config = config;
     }
+    /* gets the currently set string(s) inside our language configuration */
     public String getWelcomeMessage(){
         return config.getString("WELCOME");
     }
-    public String getGoodbyeMessage(){return config.getString("FAREWELL");}
+    public String getGoodbyeMessage(){
+        return config.getString("FAREWELL");
+    }
 
 }
