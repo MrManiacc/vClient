@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Vizun/vClient.svg?branch=master)](https://travis-ci.org/Vizun/vClient)
-[![License](http://img.shields.io/badge/license-Apache%202.0-red.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![License](https://img.shields.io/github/license/vizun/vClient.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Dependency Status](https://www.versioneye.com/user/projects/55556b56774ff25e27000131/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55556b56774ff25e27000131)
 
 ---
