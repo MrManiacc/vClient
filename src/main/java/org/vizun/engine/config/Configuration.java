@@ -10,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /* using "JSONsimple" for configuration, will write a json parsing library later */
-public abstract class Configuration {
+public class Configuration {
 	private File configFile;
 	private JSONObject jsonObject;
 
@@ -33,15 +33,14 @@ public abstract class Configuration {
 		Object obj = jsonParser.parse(fileReader);
 		this.jsonObject = (JSONObject) obj;
 	}
-	protected String getString(String key){
+	public String getString(String key){
 		return (String) jsonObject.get(key);
 	}
 	/* JSONsimple requires the object to first be cast to a long, then we can cast it back to a int */
-	protected int getInt(String key){
+	public int getInt(String key){
 		return (int) ((long) jsonObject.get(key));
 	}
-	
-	protected float getFloat(String key){
+	public float getFloat(String key){
 		return (float) ((long)jsonObject.get(key));
 	}
 	
