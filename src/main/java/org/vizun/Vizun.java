@@ -1,13 +1,13 @@
 package org.vizun;
 
 import org.vizun.engine.config.Configuration;
-import org.vizun.engine.display.DisplayManager;
+import org.vizun.engine.display.Displaymanager;
 
 import org.lwjgl.opengl.Display;
 import org.vizun.engine.loader.Loader;
 import org.vizun.engine.model.ModelTexture;
 import org.vizun.engine.model.TexturedModel;
-import org.vizun.engine.render.MasterRenderer;
+import org.vizun.engine.render.masterRenderer;
 import org.vizun.engine.shader.EntityShader;
 import org.vizun.engine.util.VoxelData;
 import org.vizun.engine.util.language;
@@ -18,13 +18,13 @@ import org.vizun.engine.model.RawModel;
  */
 public class Vizun {
     
-    private static DisplayManager displayManager;
-    private static final MasterRenderer masterRenderer = new MasterRenderer();
+    private static Displaymanager displayManager;
+    private static final org.vizun.engine.render.masterRenderer masterRenderer = new masterRenderer();
     private static final language lang = new language(new Configuration("src/main/resources/configurations/english.json"));
     private static final Loader loader = new Loader();
 
     public static void main(String[] args){
-        displayManager = new DisplayManager(800, 600, 120, "Vizun");
+        displayManager = new Displaymanager(800, 600, 120, "Vizun");
         displayManager.createDisplay();
         EntityShader shader = new EntityShader();
         RawModel model = loader.loadToVao(VoxelData.vertics, VoxelData.indices, VoxelData.textureCoords);
@@ -45,7 +45,7 @@ public class Vizun {
         displayManager.closeDisplay();
     }
 
-    public static DisplayManager getDisplayManager(){
+    public static Displaymanager getDisplayManager(){
         return displayManager;
     }
     public static language getLang(){

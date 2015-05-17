@@ -8,13 +8,13 @@ import java.lang.reflect.Array;
 /**
  * Created by James on 5/15/2015.
  */
-public class DisplayManager {
+public class Displaymanager {
     private int width, height, maxFps;
     private String title;
     private PixelFormat pixelFormat;
     private ContextAttribs contexAttribs;
 
-    public DisplayManager(int width, int height, int maxFps, String title){
+    public Displaymanager(int width, int height, int maxFps, String title){
         this.width = width;
         this.height = height;
         /* sets the maximum allowed frames to be rendered per a second */
