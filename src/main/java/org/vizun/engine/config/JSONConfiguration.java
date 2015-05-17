@@ -15,6 +15,8 @@ import java.io.InputStream;
 
 public class JSONConfiguration implements Config {
     
+    private final ClassLoader loader = getClass().getClassLoader();
+    
     private final File config;
     
     private JsonFactory factory = new JsonFactory();
@@ -25,6 +27,7 @@ public class JSONConfiguration implements Config {
      * Load a json configuration file at the give file location 
      * @param file json
      */
+    
     public JSONConfiguration(File file) {
         config = file;
         try {
@@ -33,6 +36,11 @@ public class JSONConfiguration implements Config {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public JSONConfiguration(String file) {
+
+        
     }
     
     @Override
