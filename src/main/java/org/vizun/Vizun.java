@@ -1,13 +1,11 @@
 package org.vizun;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import  org.vizun.engine.display.Displaymanager;
 
 import org.lwjgl.opengl.Display;
 
-/**
- * Created by jamesraynor on 5/14/15.
- */
 public class Vizun {
     
     public static Displaymanager displayManager;
@@ -22,9 +20,13 @@ public class Vizun {
         }
         displayManager.closeDisplay();
         
-        
+        logger = LoggerFactory.getLogger("org.vizun");
     }
-    
+
+    /**
+     * Get the logger instance for Vizun*
+     * @return logger instance
+     */
     public static Logger getLogger() {
         return logger;
     }
