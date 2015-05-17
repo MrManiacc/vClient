@@ -22,7 +22,7 @@ public class Vizun {
     private static final MasterRenderer masterRenderer = new MasterRenderer();
     private static final language lang = new language(new Configuration("src/main/resources/configurations/english.json"));
     private static final Loader loader = new Loader();
-    
+
     public static void main(String[] args){
         displayManager = new DisplayManager(800, 600, 120, "Vizun");
         displayManager.createDisplay();
