@@ -1,5 +1,6 @@
 package org.vizun;
 
+import org.slf4j.Logger;
 import  org.vizun.engine.display.Displaymanager;
 
 import org.lwjgl.opengl.Display;
@@ -10,6 +11,8 @@ import org.lwjgl.opengl.Display;
 public class Vizun {
     
     public static Displaymanager displayManager;
+    
+    private static Logger logger;
 
     public static void main(String[] args){
         displayManager = new Displaymanager(800, 600, 120, "Vizun");
@@ -18,5 +21,11 @@ public class Vizun {
             displayManager.updateDisplay();
         }
         displayManager.closeDisplay();
+        
+        
+    }
+    
+    public static Logger getLogger() {
+        return logger;
     }
 }
