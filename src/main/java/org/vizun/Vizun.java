@@ -1,22 +1,31 @@
 package org.vizun;
 
-import org.vizun.engine.display.Displaymanager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vizun.engine.config.Config;
+
 import org.vizun.engine.config.JSONConfiguration;
-import  org.vizun.engine.display.Displaymanager;
+
+import org.vizun.lib.DataFolder;
 
 import org.lwjgl.opengl.Display;
+
+import org.vizun.engine.display.Displaymanager;
+
 import org.vizun.engine.loader.Loader;
+
 import org.vizun.engine.model.ModelTexture;
 import org.vizun.engine.model.TexturedModel;
+
 import org.vizun.engine.render.masterRenderer;
+
 import org.vizun.engine.shader.EntityShader;
+
 import org.vizun.engine.util.VoxelData;
 import org.vizun.engine.util.language;
+
 import org.vizun.engine.model.RawModel;
-import org.vizun.lib.DataFolder;
+
 
 import java.io.File;
 
@@ -26,6 +35,9 @@ public class Vizun {
     private static final org.vizun.engine.render.masterRenderer masterRenderer = new masterRenderer();
     private static final Loader loader = new Loader();
     private static Logger logger;
+    private static final language lang = new language(new JSONConfiguration(new File("config/spanish.json")));
+    
+    private static File dataDirectory = new DataFolder().getDataFolder();
     /**
      * Will not be used until "JSONConfiguration" is complete.
      * private static final language lang = new language(new JSONConfiguration(new File("src/main/resources/configurations/english.json")));
@@ -78,6 +90,14 @@ public class Vizun {
 
     public static Displaymanager getDisplayManager(){
         return displayManager;
+    }
+    
+    public static language getLang() {
+        return lang;
+    }
+    
+    public static File getDataDirectory() {
+        return dataDirectory;
     }
 
     /**
