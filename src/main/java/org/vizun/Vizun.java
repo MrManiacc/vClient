@@ -16,6 +16,7 @@ import org.vizun.engine.shader.EntityShader;
 import org.vizun.engine.util.VoxelData;
 import org.vizun.engine.util.language;
 import org.vizun.engine.model.RawModel;
+import org.vizun.lib.DataFolder;
 
 import java.io.File;
 
@@ -25,7 +26,10 @@ public class Vizun {
     private static final org.vizun.engine.render.masterRenderer masterRenderer = new masterRenderer();
     private static final Loader loader = new Loader();
     private static Logger logger;
-    private static final language lang = new language(new JSONConfiguration(new File("src/main/resources/configurations/english.json")));
+    /**
+     * Will not be used until "JSONConfiguration" is complete.
+     * private static final language lang = new language(new JSONConfiguration(new File("src/main/resources/configurations/english.json")));
+     */
 
     public static void main(String[] args){
         displayManager = new Displaymanager(800, 600, 120, "Vizun");
@@ -70,15 +74,15 @@ public class Vizun {
      * Called on the closure of the application *
      * This method should simply save logs and close out stuff*
      */
-    private static void onDisable() {
-        
-    }
+    private static void onDisable() {}
 
     public static Displaymanager getDisplayManager(){
         return displayManager;
     }
-    public static language getLang(){
-        return lang;
-    }
+
+    /**
+    * Will not be used until "JSONConfiguration" is complete.
+    * public static language getLang(){return lang;}
+    */
 
 }

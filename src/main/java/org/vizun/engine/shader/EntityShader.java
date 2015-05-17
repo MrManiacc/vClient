@@ -16,6 +16,6 @@ public class EntityShader extends ProgramShader{
         super.bindAttribute(1,"textureCoords");
     }
      protected void getAllUniformLocation() {
-
-    }
+         //TODO load in uniform variables to be rendered in shader
+     }
 }

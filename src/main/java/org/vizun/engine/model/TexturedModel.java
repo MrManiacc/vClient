@@ -5,18 +5,26 @@ package org.vizun.engine.model;
  */
 public class TexturedModel {
     private RawModel rawModel;
-    private ModelTexture texutre;
+    private ModelTexture texture;
 
-    public TexturedModel(RawModel rawModel, ModelTexture texutre) {
+    public TexturedModel(RawModel rawModel, ModelTexture texture) {
         this.rawModel = rawModel;
-        this.texutre = texutre;
+        this.texture = texture;
     }
 
+    /**
+     * Returns a instance of rawModel, see "RawModel"
+     * @return rawModel
+     */
     public RawModel getRawModel() {
         return rawModel;
     }
 
+    /**
+     * Returns a instance of ModelTexture, see "ModelTexture"
+     * @return texture
+     */
     public ModelTexture getTexutre() {
-        return texutre;
+        return texture;
     }
 }

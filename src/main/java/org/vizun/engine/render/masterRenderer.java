@@ -17,7 +17,10 @@ public class masterRenderer {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
         GL11.glClearColor(1,0,0, 1);
     }
-    /*renders quad */
+
+    /**
+     * Renders a TexturedModel instance, see "TexturedModel"
+     */
     public void render(TexturedModel model){
         GL30.glBindVertexArray(model.getRawModel().getVaoID());
         GL20.glEnableVertexAttribArray(0);

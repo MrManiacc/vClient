@@ -19,6 +19,9 @@ public abstract class ProgramShader {
     private int FragmentShaderID;
     private static FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 
+    /**
+     * Loads shader into gpu/openGL instance
+     */
   public ProgramShader(String VertexFile, String FragmentFile){
       VertexShaderID = loadShader(VertexFile, GL20.GL_VERTEX_SHADER);
       FragmentShaderID = loadShader(FragmentFile, GL20.GL_FRAGMENT_SHADER);
@@ -38,6 +41,9 @@ public abstract class ProgramShader {
         GL20.glUseProgram(0);
     }
 
+    /**
+     * shutsdown all the shader related code
+     */
     public void cleanUp() {
         stop();
         GL20.glDetachShader(ProgramID, VertexShaderID);
@@ -49,30 +55,46 @@ public abstract class ProgramShader {
 
     protected abstract void getAllUniformLocation();
 
+    /**
+     * finds the point in which uniform is located inside the glsl shader
+     * @return Uniform location
+     */
     protected int getUniformLocation(String uniform) {
+
         return GL20.glGetUniformLocation(ProgramID, uniform);
     }
 
     protected void bindAttribute(int attribute, String variableName) {
         GL20.glBindAttribLocation(ProgramID, attribute, variableName);
     }
-
+    /**
+     * Loads floats into the glsl instance
+     */
     protected void loadFloat(int location, float value) {
         GL20.glUniform1f(location, value);
     }
-
+    /**
+     * Loads 3d vectors into the glsl instance
+     */
     protected void loadVector(int location, Vector3f value) {
         GL20.glUniform3f(location, value.x, value.y, value.z);
     }
+    /**
+     * Loads 2d vectors into the glsl instance
+     */
 
     protected void load2dVector(int location, Vector2f value) {
         GL20.glUniform2f(location, value.x, value.y);
     }
-
+    /**
+     * Loads integers into the glsl instance
+     */
     protected void loadInt(int location, int value) {
         GL20.glUniform1i(location, value);
     }
-
+    /**
+     * Loads booleans into the glsl instance
+     */
     protected void loadBoolean(int location, boolean value) {
         float toLoad = 0;
         if (value) {
@@ -80,7 +102,9 @@ public abstract class ProgramShader {
         }
         GL20.glUniform1f(location, toLoad);
     }
-
+    /**
+     * Loads matrices into the glsl instance
+     */
     protected void loadMatrix(int location, Matrix4f martrix) {
         martrix.store(matrixBuffer);
         matrixBuffer.flip();
@@ -89,6 +113,10 @@ public abstract class ProgramShader {
 
     protected abstract void bindAttributes();
 
+    /**
+     * private method to parse glsl file and convert to openGL code
+     * @return shaderID
+     */
     private static int loadShader(String file, int type) {
         StringBuilder shaderSource = new StringBuilder();
         try {

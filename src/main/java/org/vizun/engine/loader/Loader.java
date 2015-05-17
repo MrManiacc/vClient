@@ -35,6 +35,11 @@ public class Loader {
         unbindVao();
         return new RawModel(vaoID, indices.length);
     }
+
+    /**
+     * see "textureLoader"
+     * @return texutreId
+     */
     public int loadTexture(String textureName) {
         int texutreId = 0;
         try {
@@ -52,12 +57,20 @@ public class Loader {
         return texutreId;
     }
 
+    /**
+     * Creates a vao inside of openGL contex and returns that vaoID, so things can be added, removed, ect...
+     * @return vaoID
+     */
     private int createVAO(){
         int vaoID = GL30.glGenVertexArrays();
         vaos.add(vaoID);
         GL30.glBindVertexArray(vaoID);
         return vaoID;
     }
+
+    /**
+     * Sends data array to Vertex Array Object to be used inside of the shader, and eventually rendered on to the screen
+     */
     private void storeDataInAttributeList(int attribNum, float[] data, int offset){
         int vboId = GL15.glGenBuffers();
         vbos.add(vboId);
@@ -67,6 +80,10 @@ public class Loader {
         GL20.glVertexAttribPointer(attribNum, offset, GL11.GL_FLOAT, false, 0,0);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
+
+    /**
+     * Removes all the vaos, vbos, and textures.
+     */
     public void cleanUp(){
         for(int vao : vaos){
             GL30.glDeleteVertexArrays(vao);
@@ -79,9 +96,16 @@ public class Loader {
         }
     }
 
+    /**
+     *  Unbinds the Vertex array currently bound.
+     */
     private void unbindVao(){
         GL30.glBindVertexArray(0);
     }
+
+    /**
+     * binds indices to vbo inside of the current vao
+     */
     private void bindIndicesBuffer(int[] indices){
         int vboID = GL15.glGenBuffers();
         vbos.add(vboID);
@@ -89,13 +113,21 @@ public class Loader {
         IntBuffer buffer = storeDataInIntBuffer(indices);
         GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER , buffer, GL15.GL_STATIC_DRAW);
     }
+
+    /**
+     * Converts int array to IntBuffer, to be read from vao/vbo
+     * @return buffer
+     */
     private IntBuffer storeDataInIntBuffer(int[] data){
         IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
         buffer.put(data);
         buffer.flip();
         return buffer;
     }
-
+    /**
+     * Converts int array to FloatBuffer, to be read from vao/vbo
+     * @return buffer
+     */
     private FloatBuffer storeInFloatBuffer(float data[]){
         FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
         buffer.put(data);

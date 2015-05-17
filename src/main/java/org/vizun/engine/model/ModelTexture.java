@@ -6,9 +6,11 @@ package org.vizun.engine.model;
 public class ModelTexture {
     private int TextureID;
 
-    public ModelTexture(int id){
-        this.TextureID = id;
-    }
+    public ModelTexture(int id){this.TextureID = id;}
+    /**
+     * Returns the openGL location of texture, after it is loaded up.
+     * @return TextureID
+     */
     public int getID(){
         return TextureID;
     }
