@@ -14,6 +14,7 @@ public interface Config {
     public String getString(String key);
     public String[] getArray(String key);
     public float getFloat(String key);
+    public Object get(String key);
     
     public void load(String json);
     public void load(File json);
