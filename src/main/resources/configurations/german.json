@@ -1,0 +1,7 @@
+{
+  "WELCOME": "willkommen!",
+  "FAREWELL": "abschied!",
+  "PREFIX" : "[Vizun] ",
+  "TEXTURE_NOT_FOUND": "- [Texture not found]: ",
+  "TEXTURE_LOADED": "[Textur beladen] "
+}

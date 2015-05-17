@@ -22,7 +22,8 @@ public class Displaymanager {
         this.title = title;
         this.pixelFormat = new PixelFormat();
         /* sets the version of openGL e.g "3.2" */
-        this.contexAttribs = new ContextAttribs(3,2).withForwardCompatible(true).withProfileCore(true);
+        PixelFormat pixelFormat = new PixelFormat();
+        this.contexAttribs = new ContextAttribs(3, 2).withForwardCompatible(true).withProfileCore(true);
     }
 
     public void createDisplay(){
@@ -30,14 +31,15 @@ public class Displaymanager {
             /* sets the size of the screen to the predefined width and height */
             Display.setDisplayMode(new DisplayMode(width, height));
             /* creates the openGL display, can throw a exception if the same instance of a game tries to create a window */
-            Display.create(pixelFormat, contexAttribs);
+            /* Display.create(pixelFormat, contexAttribs); */
+            Display.create();
             /* sets the title of the game to defined title */
             Display.setTitle(title);
         }catch(LWJGLException ex){
             ex.printStackTrace();
         }
         /* creates a openGL view port at 0,0 (top right) */
-        setViewPort(0,0);
+        //setViewPort(0,0);
     }
     public void updateDisplay(){
         /* updates the openGL graphics */
