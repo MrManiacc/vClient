@@ -134,4 +134,8 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://vizunproject.atlassian.net</url>
+    </issueManagement>
 </project>
