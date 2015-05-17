@@ -90,7 +90,6 @@
             <artifactId>spring-core</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
-<<<<<<< HEAD
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -121,31 +120,21 @@
             <artifactId>vecmath</artifactId>
             <version>1.3.1</version>
         </dependency>
-=======
-	<dependency>
-	    <groupId>com.googlecode.json-simple</groupId>
-	    <artifactId>json-simple</artifactId>
-	    <version>1.1</version>
- 	 </dependency>
-	 <dependency>
-		<groupId>org.lwjgl.lwjgl</groupId>
-		<artifactId>lwjgl_util</artifactId>
-		<version>2.8.4</version>
-	</dependency>
-	<dependency>
-		<groupId>org.slick2d</groupId>
-		<artifactId>slick2d-core</artifactId>
-		<version>1.0.1</version>
-	</dependency>
-	<dependency>
-      <groupId>javax.jnlp</groupId>
-      <artifactId>jnlp-api</artifactId>
-      <version>7.0</version>
-      <scope>system</scope>
-      <systemPath>${java.home}/lib/javaws.jar</systemPath>
-    </dependency>
-
->>>>>>> 3a0773e4ca524ceec81f69f2e394565728896393
+	    <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+	        <artifactId>json-simple</artifactId>
+	        <version>1.1</version>
+ 	    </dependency>
+	     <dependency>
+		    <groupId>org.lwjgl.lwjgl</groupId>
+	        <artifactId>lwjgl_util</artifactId>
+		    <version>2.8.4</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.slick2d</groupId>
+		    <artifactId>slick2d-core</artifactId>
+		    <version>1.0.1</version>
+	    </dependency>
     </dependencies>
 
 </project>
