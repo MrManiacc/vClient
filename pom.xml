@@ -89,6 +89,13 @@
 		<artifactId>slick2d-core</artifactId>
 		<version>1.0.1</version>
 	</dependency>
+	<dependency>
+      <groupId>javax.jnlp</groupId>
+      <artifactId>jnlp-api</artifactId>
+      <version>7.0</version>
+      <scope>system</scope>
+      <systemPath>${java.home}/lib/javaws.jar</systemPath>
+    </dependency>
 
     </dependencies>
 
