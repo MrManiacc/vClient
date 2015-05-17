@@ -34,7 +34,7 @@ public class textureLoader {
             }
         }
 
-        buffer.flip(); //FOR THE LOVE OF GOD DO NOT FORGET THIS
+        buffer.flip();
 
         int textureID = glGenTextures(); //Generate texture ID
         glBindTexture(GL_TEXTURE_2D, textureID); //Bind texture ID

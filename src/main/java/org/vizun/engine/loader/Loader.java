@@ -39,9 +39,16 @@ public class Loader {
         int texutreId = 0;
         try {
             texutreId = textureLoader.loadTexture(ImageIO.read(new File("src/main/resources/textures/" + textureName + ".png")));
-            Vizun.getLang().sendTexturedLoaded(textureName);
+
+            /*Vizun.getLang().sendTexturedLoaded(textureName); will be re added after River updates json reading */
+            /* TEMP */
+            System.out.println(textureName + ".png loaded!");
             textures.add(texutreId);
-        }catch(Exception e){Vizun.getLang().sendTextureNotLoaded(textureName);}
+        }catch(Exception e){
+            /* Vizun.getLang().sendTextureNotLoaded(textureName); will be re added after River updates json reading */
+            /*TEMP */
+            System.err.println(textureName + ".png not found!");
+        }
         return texutreId;
     }
 
