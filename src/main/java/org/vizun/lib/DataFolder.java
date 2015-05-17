@@ -1,13 +1,14 @@
 package org.vizun.lib;
 
+import org.slf4j.Logger;
+import org.vizun.Vizun;
+
 import java.io.File;
 
-/**
- * Created by River on 5/16/2015.
- */
 public class DataFolder {
     
     private static File data_directory;
+    private final Logger logger = Vizun.getLogger();
     
     enum OPERATING_SYSTEM {Windows, Mac, Linux, Unsupported}
     
@@ -33,27 +34,31 @@ public class DataFolder {
         switch (operSys) {
             case Windows:
                 data_directory = new File(System.getenv("APPDATA") + "/Vizun");
+                logger.debug("Data Directory set to windows: {}", data_directory);
                 break;
             case Linux:
                 data_directory = new File(System.getProperty("user.home") + "/.vizun");
+                logger.debug("Data Directory set to linux: {}", data_directory);
                 break;
             case Mac:
                 data_directory  = new File(System.getProperty("user.home") + "/Library/Application Support");
+                logger.debug("Data Directory set to OSX: {}", data_directory);
                 break;
             case Unsupported:
             default:
                 //Unsupported operating systems will receive no support.
                 data_directory = new File(System.getProperty("user.home") + "/.Vizun");
+                logger.debug("Data Directory set to Unsupported OS: {}", data_directory);
+                logger.warn("Unsupported operating system. Attempting to use Data Directory: {}", data_directory);
                 break;
         }
-        
     }
 
     /**
      * Return the game data directory.*
      * @return Game Directory
      */
-    public static File getDataFolder() {
+    public File getDataFolder() {
         return data_directory;
     }
 }

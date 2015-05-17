@@ -44,6 +44,56 @@ public class Vizun {
      */
 
     public static void main(String[] args){
+        
+        final Vizun vizun = new Vizun();
+
+        logger = LoggerFactory.getLogger("org.vizun");
+        
+        new Runnable() {
+            @Override
+            public void run() {
+                vizun.setupDisplay();
+            }
+        }.run();
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Vizun.onDisable();
+            }
+        }));
+        
+    }
+
+    /**
+     * Get the logger instance for Vizun*
+     * @return logger instance
+     */
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    /**
+     * Called on the closure of the application *
+     * This method should simply save logs and close out stuff*
+     */
+    private static void onDisable() {
+        logger.trace("Disabling Vizun.");
+    }
+
+    public static Displaymanager getDisplayManager(){
+        return displayManager;
+    }
+    
+    public static language getLang() {
+        return lang;
+    }
+    
+    public static File getDataDirectory() {
+        return dataDirectory;
+    }
+    
+    private void setupDisplay() {
         displayManager = new Displaymanager(800, 600, 120, "Vizun");
         displayManager.createDisplay();
         EntityShader shader = new EntityShader();
@@ -63,41 +113,6 @@ public class Vizun {
         loader.cleanUp();
         masterRenderer.stop();
         displayManager.closeDisplay();
-        
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Vizun.onDisable();
-            }
-        }));
-        
-        logger = LoggerFactory.getLogger("org.vizun");
-    }
-
-    /**
-     * Get the logger instance for Vizun*
-     * @return logger instance
-     */
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    /**
-     * Called on the closure of the application *
-     * This method should simply save logs and close out stuff*
-     */
-    private static void onDisable() {}
-
-    public static Displaymanager getDisplayManager(){
-        return displayManager;
-    }
-    
-    public static language getLang() {
-        return lang;
-    }
-    
-    public static File getDataDirectory() {
-        return dataDirectory;
     }
 
     /**
