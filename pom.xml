@@ -76,11 +76,6 @@
             <version>2.9.3</version>
         </dependency>
         <dependency>
-            <groupId>slick</groupId>
-            <artifactId>slick</artifactId>
-            <version>274</version>
-        </dependency>
-        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.187</version>
