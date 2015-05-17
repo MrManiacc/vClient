@@ -31,8 +31,8 @@ public class Displaymanager {
             /* sets the size of the screen to the predefined width and height */
             Display.setDisplayMode(new DisplayMode(width, height));
             /* creates the openGL display, can throw a exception if the same instance of a game tries to create a window */
-            /* Display.create(pixelFormat, contexAttribs); */
-            Display.create();
+             Display.create(pixelFormat, contexAttribs);
+            //Display.create();
             /* sets the title of the game to defined title */
             Display.setTitle(title);
         }catch(LWJGLException ex){
