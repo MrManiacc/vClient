@@ -5,11 +5,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 import org.vizun.Vizun;
 import org.vizun.engine.model.RawModel;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -35,14 +36,13 @@ public class Loader {
         return new RawModel(vaoID, indices.length);
     }
     public int loadTexture(String textureName) {
-     int texutreId = 0;
-      try {
-          Texture texutre = TextureLoader.getTexture("PNG", new FileInputStream("src/main/resources/textures/" + textureName + ".png"));
-          texutreId = texutre.getTextureID();
-          Vizun.getLang().sendTexturedLoaded(textureName);
-          textures.add(texutreId);
-      }catch(Exception e){Vizun.getLang().sendTextureNotLoaded(textureName);}
-          return texutreId;
+        int texutreId = 0;
+        try {
+            texutreId = textureLoader.loadTexture(ImageIO.read(new File("src/main/resources/textures/" + textureName + ".png")));
+            Vizun.getLang().sendTexturedLoaded(textureName);
+            textures.add(texutreId);
+        }catch(Exception e){Vizun.getLang().sendTextureNotLoaded(textureName);}
+        return texutreId;
     }
 
     private int createVAO(){
@@ -95,4 +95,6 @@ public class Loader {
         buffer.flip();
         return buffer;
     }
+
 }
+
