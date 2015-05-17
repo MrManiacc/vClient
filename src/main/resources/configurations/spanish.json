@@ -1,4 +1,7 @@
 {
   "WELCOME": "bienvenida!",
-  "FAREWELL": "despedida!"
+  "FAREWELL": "despedida!",
+  "PREFIX" : "[Vizun] ",
+  "TEXTURE_NOT_FOUND": "- [Texture not found]: ",
+  "TEXTURE_LOADED" : "[Textura Cargador] "
 }

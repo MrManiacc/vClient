@@ -5,6 +5,8 @@ package org.vizun.engine.util;
  */
 public class VoxelData {
     /* Used for rendering a basic quad. */
-    public static float[] vertics = new float[] {-0.5f, 0.5f, 0f, -0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, 0.5f, 0f,};
+    private static float scale = 0.5f;
+    public static float[] vertics = new float[] {-scale, scale, 0f, -scale, -scale, 0f, scale, -scale, 0f, scale, scale, 0f,};
     public static int[] indices = new int[] {0,1,3,3,1,2};
+    public static float[] textureCoords = new float[] {0,0,0,1,1,1,1,0};
 }

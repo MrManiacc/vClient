@@ -12,7 +12,8 @@ public class EntityShader extends ProgramShader{
     }
 
     protected void bindAttributes(){
-     super.bindAttribute(0, "position");
+        super.bindAttribute(0, "position");
+        super.bindAttribute(1,"textureCoords");
     }
      protected void getAllUniformLocation() {
 

@@ -5,9 +5,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
-import org.vizun.engine.render.RawModel;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.vizun.Vizun;
+import org.vizun.engine.model.RawModel;
 
-import java.nio.Buffer;
+import java.io.FileInputStream;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -19,14 +22,27 @@ import java.util.List;
 public class Loader {
     private List<Integer> vaos = new ArrayList<Integer>();
     private List<Integer> vbos = new ArrayList<Integer>();
+    private List<Integer> textures = new ArrayList<Integer>();
+
 
     /*loads voxel data to graphics card */
-    public RawModel loadToVao(float[] vertices, int[] indices){
+    public RawModel loadToVao(float[] vertices, int[] indices, float[] textureCoords){
         int vaoID = createVAO();
         bindIndicesBuffer(indices);
-        storeDataInAttributeList(0, vertices);
+        storeDataInAttributeList(0, vertices, 3);
+        storeDataInAttributeList(1, textureCoords,2);
         unbindVao();
         return new RawModel(vaoID, indices.length);
+    }
+    public int loadTexture(String textureName) {
+     int texutreId = 0;
+      try {
+          Texture texutre = TextureLoader.getTexture("PNG", new FileInputStream("src/main/resources/textures/" + textureName + ".png"));
+          texutreId = texutre.getTextureID();
+          Vizun.getLang().sendTexturedLoaded(textureName);
+          textures.add(texutreId);
+      }catch(Exception e){Vizun.getLang().sendTextureNotLoaded(textureName);}
+          return texutreId;
     }
 
     private int createVAO(){
@@ -35,13 +51,13 @@ public class Loader {
         GL30.glBindVertexArray(vaoID);
         return vaoID;
     }
-    private void storeDataInAttributeList(int attribNum, float[] data){
+    private void storeDataInAttributeList(int attribNum, float[] data, int offset){
         int vboId = GL15.glGenBuffers();
         vbos.add(vboId);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboId);
         FloatBuffer buffer = storeInFloatBuffer(data);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-        GL20.glVertexAttribPointer(attribNum, 3, GL11.GL_FLOAT, false, 0,0);
+        GL20.glVertexAttribPointer(attribNum, offset, GL11.GL_FLOAT, false, 0,0);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
     public void cleanUp(){
@@ -50,6 +66,9 @@ public class Loader {
         }
         for(int vbo : vbos){
             GL15.glDeleteBuffers(vbo);
+        }
+        for(int texture : textures){
+            GL11.glDeleteTextures(texture);
         }
     }
 
