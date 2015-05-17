@@ -1,4 +1,7 @@
 {
-  "WELCOME": "willkommen!",
-  "FAREWELL": "abschied!"
+  "WELCOME": "Hallo!",
+  "FAREWELL": "Auf Wiedersehen!",
+  "PREFIX" : "[Vizun] ",
+  "TEXTURE_NOT_FOUND": "- [Bild nicht gefunden]: ",
+  "TEXTURE_LOADED": "[Bild gefunden] "
 }
