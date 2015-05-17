@@ -20,6 +20,13 @@ public class Vizun {
         }
         displayManager.closeDisplay();
         
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Vizun.onDisable();
+            }
+        }));
+        
         logger = LoggerFactory.getLogger("org.vizun");
     }
 
@@ -29,5 +36,13 @@ public class Vizun {
      */
     public static Logger getLogger() {
         return logger;
+    }
+
+    /**
+     * Called on the closure of the application *
+     * This method should simply save logs and close out stuff*
+     */
+    private static void onDisable() {
+        
     }
 }
