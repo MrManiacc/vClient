@@ -10,7 +10,7 @@ import org.vizun.engine.shader.EntityShader;
 
 public class GameHandler {
     
-    private final Game instance;
+    private static Game instance;
     
     private static DisplayManager displayManager;
     private static MasterRenderer masterRenderer;
@@ -19,8 +19,8 @@ public class GameHandler {
     
     private Logger logger;
     
-    public GameHandler(Game instance) {
-        this.instance = instance;
+    public GameHandler(Game main) {
+        instance = main;
         logger = instance.getLogger();
     }
 
@@ -70,5 +70,9 @@ public class GameHandler {
 
     public static EntityShader getEntityShader() {
         return entityShader;
+    }
+    
+    public static Game getInstance() {
+        return GameHandler.instance;
     }
 }

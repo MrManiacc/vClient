@@ -2,20 +2,24 @@ package org.vizun.lib;
 
 import org.slf4j.Logger;
 import org.vizun.Vizun;
+import org.vizun.engine.Game;
 import org.vizun.engine.events.GameHandler;
 
 import java.io.File;
 
 public class DataFolder {
     
+    private Game instance;
+    
     private static File data_directory;
-    private final Logger logger = GameHandler.getLogger();
+    private final Logger logger = instance.getLogger();
     
     enum OPERATING_SYSTEM {Windows, Mac, Linux, Unsupported}
     
     private OPERATING_SYSTEM operSys;
     
-    public DataFolder() {
+    public DataFolder(Game instance) {
+        this.instance = instance;
         assignDirectory();
     }
     

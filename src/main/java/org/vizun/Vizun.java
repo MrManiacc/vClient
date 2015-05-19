@@ -5,14 +5,19 @@ import org.slf4j.LoggerFactory;
 import org.vizun.engine.Game;
 import org.vizun.engine.events.GameHandler;
 import org.lwjgl.opengl.Display;
+import org.vizun.lib.DataFolder;
 
 public class Vizun implements Game {
     
     static final Vizun instance = new Vizun();
     private static final GameHandler gameHandler = new GameHandler(instance);
+    
+    private static DataFolder dataFolder;
 
     public static void main(String[] args){
         final Vizun vizun = new Vizun();
+        
+        dataFolder = new DataFolder(vizun);
         
         /**
          * Creates threads for handling game events.
@@ -39,6 +44,10 @@ public class Vizun implements Game {
     @Override
     public Logger getLogger() {
         return LoggerFactory.getLogger("org.vizun");
+    }
+    
+    public static DataFolder getDataFolder() {
+        return dataFolder;
     }
 
 
