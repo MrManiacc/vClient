@@ -23,8 +23,7 @@ public class GameHandler {
         this.instance = instance;
         logger = instance.getLogger();
     }
-    
-    
+
     public void onEnable() {
         //TODO replace values for the DisplayManager with config values
         displayManager = new DisplayManager(800, 600, 120, "Vizun");
