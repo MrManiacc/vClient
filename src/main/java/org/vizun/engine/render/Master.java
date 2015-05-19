@@ -10,7 +10,7 @@ import org.vizun.engine.model.TexturedModel;
 /**
  * Created by James on 5/15/2015.
  */
-public class masterRenderer {
+public class Master {
     public void start(){}
 
     public void update(){
