@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
-import org.vizun.Vizun;
+import org.vizun.engine.events.GameHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,9 +20,9 @@ import java.io.InputStream;
 public class JSONConfiguration implements Config {
     
     private final ClassLoader loader = getClass().getClassLoader();
-    private final Logger logger = Vizun.getLogger();
+    private final Logger logger = GameHandler.getLogger();
     
-    private final File data_directory = Vizun.getDataDirectory();
+    private final File data_directory = GameHandler.getDataDirectory();
     private File config;
     
     private JsonFactory factory = new JsonFactory();
