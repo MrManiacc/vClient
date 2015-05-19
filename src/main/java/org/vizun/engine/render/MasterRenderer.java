@@ -4,14 +4,14 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
-import org.vizun.engine.model.RawModel;
+
 import org.vizun.engine.model.TexturedModel;
 
-/**
- * Created by James on 5/15/2015.
- */
-public class masterRenderer {
-    public void start(){}
+public class MasterRenderer {
+    
+    public void start(){
+        
+    }
 
     public void update(){
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);

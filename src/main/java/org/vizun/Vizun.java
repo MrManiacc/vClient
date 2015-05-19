@@ -1,49 +1,53 @@
 package org.vizun;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.vizun.engine.Game;
 import org.vizun.engine.events.GameHandler;
 import org.lwjgl.opengl.Display;
+import org.vizun.lib.DataFolder;
 
-
-public class Vizun {
-
-    private GameHandler.onEnable onEnable;
-    private GameHandler.onUpdate onUpdate;
-    private GameHandler.onDisable onDisable;
-    private GameHandler.onDisableGL onDisableGL;
+public class Vizun implements Game {
+    
+    static final Vizun instance = new Vizun();
+    private static final GameHandler gameHandler = new GameHandler(instance);
+    
+    private static DataFolder dataFolder;
 
     public static void main(String[] args){
         final Vizun vizun = new Vizun();
-        vizun.initializeEvents();
+        
+        dataFolder = new DataFolder(vizun);
+        
         /**
          * Creates threads for handling game events.
          */
         new Runnable() {
             @Override
             public void run() {
-                vizun.onEnable.onenable(800, 600, 120, "Vizun");
+                gameHandler.onEnable();
                 while (!Display.isCloseRequested()) {
-                    vizun.onUpdate.onupdate();
+                    gameHandler.onUpdate();
                 }
-                vizun.onDisableGL.ondisable();
+                gameHandler.closeGL();
             }
         }.run();
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             @Override
             public void run() {
-                vizun.onDisable.ondisable();
+                gameHandler.onDisable();
             }
         }));
     }
-
-    /**
-     * Initializes all the needed events/classes
-     */
-    private void initializeEvents(){
-        onEnable =  new GameHandler.onEnable();
-        onUpdate = new GameHandler.onUpdate();
-        onDisable = new GameHandler.onDisable();
-        onDisableGL = new GameHandler.onDisableGL();
+    
+    @Override
+    public Logger getLogger() {
+        return LoggerFactory.getLogger("org.vizun");
+    }
+    
+    public static DataFolder getDataFolder() {
+        return dataFolder;
     }
 
 
