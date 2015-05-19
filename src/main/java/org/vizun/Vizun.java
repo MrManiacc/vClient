@@ -1,5 +1,7 @@
 package org.vizun;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.vizun.engine.events.GameHandler;
 import org.lwjgl.opengl.Display;
 
@@ -44,6 +46,10 @@ public class Vizun {
         onUpdate = new GameHandler.onUpdate();
         onDisable = new GameHandler.onDisable();
         onDisableGL = new GameHandler.onDisableGL();
+    }
+    
+    public static Logger getLogger() {
+        return LoggerFactory.getLogger("org.vizun");
     }
 
 
