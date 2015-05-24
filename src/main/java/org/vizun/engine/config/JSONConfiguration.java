@@ -7,8 +7,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.vizun.Vizun;
-import org.vizun.engine.events.GameHandler;
-import org.vizun.lib.DataFolder;
+import org.vizun.GameHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;

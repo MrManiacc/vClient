@@ -1,9 +1,7 @@
 package org.vizun.lib;
 
 import org.slf4j.Logger;
-import org.vizun.Vizun;
 import org.vizun.engine.Game;
-import org.vizun.engine.events.GameHandler;
 
 import java.io.File;
 
