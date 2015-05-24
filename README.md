@@ -13,10 +13,10 @@ Visit us on our [Official Website](http://vizun.org) for project updates, inform
 
 ---
 ### Issues
-If you find issues, please report them on our [issue tracker](http://bugs.vizun.org).
+If you find issues, please report them on our [issue tracker](http://vizunproject.atlassian.com).
 
 #### Contribute
 We are an open source project! We encourage, welcome, and _need_ your contributions. If you can't contribute
 then another part of the open source workflow is to have our users submitting bug reports, etc. We welcome any
-kind of contribution. If you would like to help with the code, please note that we are officially using _Gradle_
-for building. Please take a look at some [more information](http://vizun.org/developer.php) regarding our Developer Team!
+kind of contribution. If you would like to help with the code, please note that we are officially using _Maven_
+for building. Please take a look at some [more information](CONTRIBUTING.md) regarding our Developer Team!
