@@ -1,4 +1,4 @@
-package org.vizun.engine.events;
+package org.vizun;
 
 import org.slf4j.Logger;
 import org.vizun.engine.Game;
