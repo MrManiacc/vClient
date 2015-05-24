@@ -3,9 +3,7 @@ package org.vizun.engine.config;
 import java.io.File;
 import java.io.InputStream;
 
-/**
- * Created by River on 5/17/2015.
- */
+@SuppressWarnings("unused")
 public interface Config {
     
     public void set(String key, String value);
