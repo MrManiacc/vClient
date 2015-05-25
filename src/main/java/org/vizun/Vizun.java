@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vizun.engine.Game;
 import org.lwjgl.opengl.Display;
+import org.vizun.event.EventManager;
 import org.vizun.lib.DataFolder;
 import org.vizun.util.ResourceLoader;
 
@@ -14,13 +15,14 @@ public class Vizun implements Game {
     private static final GameHandler gameHandler = new GameHandler(instance);
     private static final ResourceLoader resourceLoader = new ResourceLoader(instance);
     private static DataFolder dataFolder;
+    
+    private static EventManager eventManager = new EventManager(instance);
 
 
 
     public static void main(String[] args){
-        final Vizun vizun = new Vizun();
 
-        dataFolder = new DataFolder(vizun);
+        dataFolder = new DataFolder(instance);
         resourceLoader.loadNatives();
 
         /**
@@ -43,6 +45,7 @@ public class Vizun implements Game {
                 gameHandler.onDisable();
             }
         }));
+        
     }
 
     @Override
