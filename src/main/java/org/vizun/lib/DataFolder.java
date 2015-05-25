@@ -40,12 +40,12 @@ public class DataFolder {
             case Windows:
                 data_directory = new File(System.getenv("APPDATA") + "/Vizun");
                 natives_directory = new File(data_directory + File.separator + "windows-natives");
-                logger.debug("Data Directory set to windows: {}", data_directory);
+                logger.debug("Data Directory set to Windows: {}", data_directory);
                 break;
             case Linux:
                 data_directory = new File(System.getProperty("user.home") + "/.Vizun");
                 natives_directory = new File(data_directory + File.separator + "linux-natives");
-                logger.debug("Data Directory set to linux: {}", data_directory);
+                logger.debug("Data Directory set to Linux: {}", data_directory);
                 break;
             case Mac:
                 data_directory  = new File(System.getProperty("user.home") + "/Library/Application Support/Vizun");
@@ -70,9 +70,9 @@ public class DataFolder {
      */
     private void makeDataDir(File file){
         if(!file.isDirectory()){
-            logger.debug("Data Directory doesn't exsist, making it at {}", file);
+            logger.debug("Data Directory doesn't exist, making it at: {}", file);
             file.mkdir();
-            logger.debug("Succesfully created {}", file);
+            logger.debug("Successfully created {}", file);
         }
     }
 
