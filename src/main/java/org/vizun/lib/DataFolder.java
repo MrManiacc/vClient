@@ -77,14 +77,6 @@ public class DataFolder {
     }
 
     /**
-     * Returns the set vaule of the operating system
-     * @return operSys
-     */
-    public OPERATING_SYSTEM getOs(){
-        return operSys;
-    }
-
-    /**
      * Return the game data directory.
      * @return Game Directory
      */
