@@ -1,18 +1,20 @@
 package org.vizun.engine.config;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.*;
 import org.apache.commons.io.FileUtils;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.vizun.Vizun;
 import org.vizun.GameHandler;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import com.fasterxml.jackson.core.TreeNode;
+import org.vizun.util.ResourceLoader;
+
+import java.util.Map;
 
 /**
  * Created by River on 5/17/2015.
@@ -22,16 +24,18 @@ public class JSONConfiguration implements Config {
     
     private final ClassLoader loader = getClass().getClassLoader();
     private final Logger logger = GameHandler.getInstance().getLogger();
-    
-    private final File data_directory = Vizun.getDataFolder().getDataFolder();
+    private File data_directory ;
     private File config;
     
     private JsonFactory factory = new JsonFactory();
     private JsonParser parser;
     private JsonGenerator writer;
-    
+    private JsonNode jsonNode;
+    private ObjectMapper mapper = new ObjectMapper();
+
+
     /**
-     * Load a json configuration file at the give file location 
+     * Load a json configuration file at the give file location, INCOMPLETE
      * @param file json
      */
     
@@ -40,20 +44,23 @@ public class JSONConfiguration implements Config {
         try {
             parser = factory.createParser(file);
             writer = factory.createGenerator(file, JsonEncoding.UTF8);
+            data_directory = Vizun.getDataFolder().getDataFolder();
+            jsonNode = mapper.readTree(file);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
     
     public JSONConfiguration(String file) {
+        this.data_directory = Vizun.getDataFolder().getDataFolder();
         try {
             File configDir = new File(data_directory + "/config");
             if(configDir.isDirectory()) {
                 File[] configs = configDir.listFiles();
                 for(File conf:configs) {
-                    if(conf.getName().equals(file)) {
+                    if(conf.getName().equalsIgnoreCase(file)) {
                         config = conf;
-                        logger.debug("Found the config file. Set to {}", config.getPath());
+                        logger.debug("Found " + conf.getName() + ", set to {}", config.getPath());
                     }
                 }
             } else {
@@ -75,41 +82,47 @@ public class JSONConfiguration implements Config {
                 }
             }
             if(config == null) {
-                File loaded = new File(loader.getResource(file).getFile());
-                File dest = new File(data_directory + "/config" + file);
-                FileUtils.copyFile(loaded, dest);
-                
-                logger.trace("copied file from jar to disk config");
+                Vizun.getResourceLoader().loadConfigurations();
             }
+            parser = factory.createParser(config);
+            jsonNode = mapper.readTree(config);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
     }
-    
-    @Override
+
+
     public void set(String key, String value) {
-        
     }
 
     @Override
     public int getInteger(String key) {
-        return 0;
+        return jsonNode.path(key).getIntValue();
     }
 
     @Override
     public String getString(String key) {
-        return null;
+        return jsonNode.path(key).getTextValue();
     }
 
     @Override
     public String[] getArray(String key) {
-        return new String[0];
+        JsonNode array = jsonNode.path(key);
+        String[] stringArray = new String[]{};
+        if(array.isArray()){
+            for(int i = 0; i < array.size(); i++){
+                stringArray[i] = array.get(i).asText();
+            }
+        }
+        return stringArray;
+    }
+    public boolean getBoolean(String key){
+        return jsonNode.path(key).getBooleanValue();
     }
 
     @Override
     public float getFloat(String key) {
-        return 0;
+        return Float.valueOf(jsonNode.path(key).getTextValue());
     }
     
     @Override

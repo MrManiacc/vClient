@@ -47,12 +47,10 @@ public class Loader {
 
             /*Vizun.getLang().sendTexturedLoaded(textureName); will be re added after River updates json reading */
             /* TEMP */
-            System.out.println(textureName + ".png loaded!");
             textures.add(texutreId);
         }catch(Exception e){
             /* Vizun.getLang().sendTextureNotLoaded(textureName); will be re added after River updates json reading */
             /*TEMP */
-            System.err.println(textureName + ".png not found!");
         }
         return texutreId;
     }

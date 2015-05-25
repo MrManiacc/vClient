@@ -3,10 +3,14 @@ package org.vizun;
 import org.slf4j.Logger;
 
 import org.vizun.engine.Game;
+import org.vizun.engine.config.JSONConfiguration;
 import org.vizun.engine.display.DisplayManager;
 import org.vizun.engine.loader.Loader;
+import org.vizun.engine.model.ModelTexture;
+import org.vizun.engine.model.TexturedModel;
 import org.vizun.engine.render.MasterRenderer;
 import org.vizun.engine.shader.EntityShader;
+import org.vizun.util.VoxelData;
 
 
 public class GameHandler {
@@ -17,21 +21,24 @@ public class GameHandler {
     private static MasterRenderer masterRenderer;
     private static Loader loader;
     private static EntityShader entityShader;
+    private static TexturedModel texturedModel;
+    private JSONConfiguration displayConfiguration;
 
     private Logger logger;
     
     public GameHandler(Game main) {
         instance = main;
         logger = instance.getLogger();
+        displayConfiguration = new JSONConfiguration("display.json");
     }
-
     public void onEnable() {
-        //TODO replace values for the DisplayManager with config values
-        displayManager = new DisplayManager(800, 600, 120, "Vizun");
+        displayConfiguration.getInteger("width");
+        displayManager = new DisplayManager(displayConfiguration.getInteger("width"),displayConfiguration.getInteger("height"), displayConfiguration.getInteger("maxframes"), Vizun.getLanguage().getTitle(), displayConfiguration.getBoolean("vsync"));
         displayManager.createDisplay();
         masterRenderer = new MasterRenderer();
         loader = new Loader();
         entityShader = new EntityShader();
+        texturedModel = new TexturedModel(loader.loadToVao(VoxelData.vertics, VoxelData.indices, VoxelData.textureCoords), new ModelTexture(loader.loadTexture("test")));
     }
 
     /**
@@ -39,7 +46,6 @@ public class GameHandler {
      */
     public void onDisable() {
         logger.debug("Disabling Vizun.");
-        loader.cleanUp();
         masterRenderer.stop();
         logger.debug("Successfully executed shutdown task.");
     }
@@ -50,6 +56,7 @@ public class GameHandler {
     public void onUpdate() {
         masterRenderer.update();
         entityShader.start();
+        masterRenderer.render(texturedModel);
         entityShader.stop();
         displayManager.updateDisplay();
     }
@@ -58,6 +65,7 @@ public class GameHandler {
      * Used to disable anything that has to be disabled on the main thread
      */
     public void closeGL() {
+        loader.cleanUp();
         displayManager.closeDisplay();
     }
 

@@ -9,14 +9,15 @@ public class DisplayManager {
     private String title;
     private PixelFormat pixelFormat;
     private ContextAttribs contexAttribs;
-
-    public DisplayManager(int width, int height, int maxFps, String title) {
+    private boolean vsync;
+    public DisplayManager(int width, int height, int maxFps, String title, boolean vsync) {
         this.width = width;
         this.height = height;
         // sets the maximum allowed frames to be rendered per a second
         this.maxFps = maxFps;
         this.title = title;
         this.pixelFormat = new PixelFormat();
+        this.vsync = vsync;
         // sets the version of openGL e.g "3.2" for use of later shaders above 1.2 on Legacy based openGL computers.
         PixelFormat pixelFormat = new PixelFormat();
         this.contexAttribs = new ContextAttribs(3, 2).withForwardCompatible(true).withProfileCore(true);
@@ -30,6 +31,7 @@ public class DisplayManager {
             org.lwjgl.opengl.Display.create(pixelFormat, contexAttribs);
             //sets the title of the game to defined title
             org.lwjgl.opengl.Display.setTitle(title);
+            org.lwjgl.opengl.Display.setVSyncEnabled(vsync);
         } catch (LWJGLException ex) {
             ex.printStackTrace();
         }

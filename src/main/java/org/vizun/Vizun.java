@@ -3,25 +3,30 @@ package org.vizun;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vizun.engine.Game;
-
 import org.lwjgl.opengl.Display;
-import org.vizun.event.EventManager;
+import org.vizun.engine.config.JSONConfiguration;
 import org.vizun.lib.DataFolder;
+import org.vizun.util.Language;
 import org.vizun.util.ResourceLoader;
 
 public class Vizun implements Game {
 
     static final Vizun instance = new Vizun();
-    private static final GameHandler gameHandler = new GameHandler(instance);
-    private static final ResourceLoader resourceLoader = new ResourceLoader(instance);
+    private static GameHandler gameHandler;
+    private static ResourceLoader resourceLoader;
     private static DataFolder dataFolder;
-    
-    private static EventManager eventManager = new EventManager(instance);
+    private static Language language;
+
+
 
     public static void main(String[] args){
-
-        dataFolder = new DataFolder(instance);
+        final Vizun vizun = new Vizun();
+        dataFolder = new DataFolder(vizun);
+        resourceLoader = new ResourceLoader(instance);
         resourceLoader.loadNatives();
+        resourceLoader.loadConfigurations();
+        gameHandler  = new GameHandler(instance);
+        language = new Language(Language.LANGUAGE.ENGLISH);
 
         /**
          * Creates threads for handling game events.
@@ -43,7 +48,6 @@ public class Vizun implements Game {
                 gameHandler.onDisable();
             }
         }));
-        
     }
 
     @Override
@@ -54,4 +58,8 @@ public class Vizun implements Game {
     public static DataFolder getDataFolder() {
         return dataFolder;
     }
+    public static ResourceLoader getResourceLoader(){
+        return resourceLoader;
+    }
+    public static Language getLanguage(){return language;}
 }

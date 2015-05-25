@@ -32,6 +32,13 @@ public class ResourceLoader {
         logger.debug("Natives loaded from {}", Vizun.getDataFolder().getNativesFolder().getAbsolutePath());
     }
 
+    public void loadConfigurations() {
+        if (checkConfig(logger)) {
+            downloadConfigs(logger);
+            logger.debug("Configurations downloaded");
+        }
+    }
+
     /**
      * Checks to see if the natives need to be downloaded or not
      * @return Native files
@@ -43,37 +50,58 @@ public class ResourceLoader {
         return true;
     }
 
+    private static boolean checkConfig(Logger logger) {
+        // This number is 3 because there is 3 config files, and we want it to make sure there is at least 3 files in the dir. Will do better checking later
+        if (Vizun.getDataFolder().getConfigFolder().list().length > 3)
+            return false;
+        return true;
+    }
+
     /**
      * Downloads the required system natives for openGL instance. Will only use mediafire temporally
      * @param logger
      */
     private void downloadNatives(Logger logger){
         logger.debug("Downloading natives");
-        //TODO download natives
-        try{
-            if(Environment.getOperatingSystem() == Environment.OPERATING_SYSTEM.OSX) {
-                DownloadManager.downloadFile("http://download615.mediafire.com/4doe75vcp6fg/61pxn61sy146tyy/openal.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "openal.dylib");
-                DownloadManager.downloadFile( "http://download1382.mediafire.com/dmgdhk82oh4g/4bujeooimpcrkh3/libjinput-osx.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libjinput-osx.dylib");
-                DownloadManager.downloadFile( "http://download1073.mediafire.com/vx4ikzi5wvqg/cx0s087fmvgm1pg/liblwjgl.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "liblwjgl.dylib");
-            }else if(Environment.getOperatingSystem() == Environment.OPERATING_SYSTEM.WINDOWS){
-                DownloadManager.downloadFile("http://download1318.mediafire.com/kdn5an9fyjeg/njw3bga841w86ea/OpenAL32.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL32.dll");
-                DownloadManager.downloadFile("http://download1921.mediafire.com/2tdzuactoqdg/h62f0n12iwog43v/OpenAL64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL64.dll");
-                DownloadManager.downloadFile("http://download1164.mediafire.com/6t35x5uqu9ng/9c3ubk2ccj502ho/lwjgl64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl64.dll");
-                DownloadManager.downloadFile("http://download1952.mediafire.com/az232bu22rig/n647i19agxn38bh/lwjgl.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl.dll");
-                DownloadManager.downloadFile("http://download1521.mediafire.com/9p317s6s5amg/kudba1remdn9aa2/jinput-dx8_64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8_64.dll");
-                DownloadManager.downloadFile("http://download1014.mediafire.com/4kgvib9e9udg/4k6kssfwfhrhx1n/jinput-raw_64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw_64.dll");
-                DownloadManager.downloadFile("http://download1055.mediafire.com/9l558t9kw1tg/649kkaxb3k5ohp7/jinput-dx8.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8.dll");
-                DownloadManager.downloadFile("http://download1422.mediafire.com/yg6tb3p2gwvg/dpfii0ygj2dhbv1/jinput-raw.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw.dll");
-            }
-            else if(Environment.getOperatingSystem() == Environment.OPERATING_SYSTEM.LINUX){
-                //TODO download natives for linux
-            }
-        }
-        catch(MalformedURLException e){
+        try {
+                if (Vizun.getDataFolder().getOs() == DataFolder.OPERATING_SYSTEM.Mac) {
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/0piww9yqly09enh/openal.dylib?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "openal.dylib");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/f8v0agpiq31dfvm/libjinput-osx.dylib?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libjinput-osx.dylib");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/vapsvfz01hgyycc/liblwjgl.dylib?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "liblwjgl.dylib");
+                } else if (Vizun.getDataFolder().getOs() == DataFolder.OPERATING_SYSTEM.Windows) {
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/d0numqhxa1grcft/OpenAL32.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL32.dll");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/sdbe2edd9ee4nry/OpenAL64.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL64.dll");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/3kteh30eup5bg3v/lwjgl64.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl64.dll");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/wfe390oeptprenw/lwjgl.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl.dll");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/rv2j8skbvztj8r7/jinput-dx8_64.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8_64.dll");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/yxyivugbl7169bg/jinput-raw_64.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw_64.dll");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/uimdseub821lpfi/jinput-dx8.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8.dll");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/svcked2y0lqc6s1/jinput-raw.dll?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw.dll");
+                } else if (Vizun.getDataFolder().getOs() == DataFolder.OPERATING_SYSTEM.Linux) {
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/2ns4vdsq6u37yfw/libjinput-linux64.so?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libjinput-linux64.so");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/1d2v0b6ykc9r5sd/libjinput-linux.so?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libjinput-linux.so");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/09h0rkock5zqsrz/liblwjgl64.so?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "liblwjgl64.so");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/w67p0nwi5wbsrxd/liblwjgl.so?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "liblwjgl.so");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/737hm65qn4pq8ym/libopenal64.so?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libopenal64.so");
+                    DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/zjh6kj0ses1hemm/libopenal.so?dl=1", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libopenal.so");
+                }
+        } catch (MalformedURLException e) {
             logger.error("An error occured while downloading natives");
-        }catch(IOException e){
-            logger.error("An error occuerd while write file to destination");
+        } catch (IOException e) {
+            logger.error("An error occuerd while write native file to destination");
         }
-        logger.debug("Natives downloaded");
+    }
+
+    private void downloadConfigs(Logger logger) {
+        try {
+            DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/e827v187mzuc62q/english.json?dl=1", Vizun.getDataFolder().getConfigFolder().getAbsolutePath(), "english.json");
+            DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/96caj020gclhovr/german.json?dl=1", Vizun.getDataFolder().getConfigFolder().getAbsolutePath(), "german.json");
+            DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/9nnfow3uh2mkz3c/spanish.json?dl=1", Vizun.getDataFolder().getConfigFolder().getAbsolutePath(), "spanish.json");
+            DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/1r2h4kfi3xthe81/display.json?dl=1", Vizun.getDataFolder().getConfigFolder().getAbsolutePath(), "display.json");
+        } catch (MalformedURLException e) {
+            logger.error("An error occured while downloading configs");
+        } catch (IOException e) {
+            logger.error("An error occuerd while write config file to destination");
+        }
     }
 }
