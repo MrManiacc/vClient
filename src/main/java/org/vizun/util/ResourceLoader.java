@@ -51,21 +51,21 @@ public class ResourceLoader {
         logger.debug("Downloading natives");
         //TODO download natives
         try{
-            if(Vizun.getDataFolder().getOs() == DataFolder.OPERATING_SYSTEM.Mac) {
-                DownloadManager.downloadFile(logger, "http://download615.mediafire.com/4doe75vcp6fg/61pxn61sy146tyy/openal.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "openal.dylib");
-                DownloadManager.downloadFile(logger, "http://download1382.mediafire.com/dmgdhk82oh4g/4bujeooimpcrkh3/libjinput-osx.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libjinput-osx.dylib");
-                DownloadManager.downloadFile(logger, "http://download1073.mediafire.com/vx4ikzi5wvqg/cx0s087fmvgm1pg/liblwjgl.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "liblwjgl.dylib");
-            }else if(Vizun.getDataFolder().getOs() == DataFolder.OPERATING_SYSTEM.Windows){
-                DownloadManager.downloadFile(logger, "http://download1318.mediafire.com/kdn5an9fyjeg/njw3bga841w86ea/OpenAL32.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL32.dll");
-                DownloadManager.downloadFile(logger, "http://download1921.mediafire.com/2tdzuactoqdg/h62f0n12iwog43v/OpenAL64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL64.dll");
-                DownloadManager.downloadFile(logger, "http://download1164.mediafire.com/6t35x5uqu9ng/9c3ubk2ccj502ho/lwjgl64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl64.dll");
-                DownloadManager.downloadFile(logger, "http://download1952.mediafire.com/az232bu22rig/n647i19agxn38bh/lwjgl.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl.dll");
-                DownloadManager.downloadFile(logger, "http://download1521.mediafire.com/9p317s6s5amg/kudba1remdn9aa2/jinput-dx8_64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8_64.dll");
-                DownloadManager.downloadFile(logger, "http://download1014.mediafire.com/4kgvib9e9udg/4k6kssfwfhrhx1n/jinput-raw_64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw_64.dll");
-                DownloadManager.downloadFile(logger, "http://download1055.mediafire.com/9l558t9kw1tg/649kkaxb3k5ohp7/jinput-dx8.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8.dll");
-                DownloadManager.downloadFile(logger, "http://download1422.mediafire.com/yg6tb3p2gwvg/dpfii0ygj2dhbv1/jinput-raw.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw.dll");
+            if(Environment.getOperatingSystem() == Environment.OPERATING_SYSTEM.OSX) {
+                DownloadManager.downloadFile("http://download615.mediafire.com/4doe75vcp6fg/61pxn61sy146tyy/openal.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "openal.dylib");
+                DownloadManager.downloadFile( "http://download1382.mediafire.com/dmgdhk82oh4g/4bujeooimpcrkh3/libjinput-osx.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "libjinput-osx.dylib");
+                DownloadManager.downloadFile( "http://download1073.mediafire.com/vx4ikzi5wvqg/cx0s087fmvgm1pg/liblwjgl.dylib", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "liblwjgl.dylib");
+            }else if(Environment.getOperatingSystem() == Environment.OPERATING_SYSTEM.WINDOWS){
+                DownloadManager.downloadFile("http://download1318.mediafire.com/kdn5an9fyjeg/njw3bga841w86ea/OpenAL32.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL32.dll");
+                DownloadManager.downloadFile("http://download1921.mediafire.com/2tdzuactoqdg/h62f0n12iwog43v/OpenAL64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "OpenAL64.dll");
+                DownloadManager.downloadFile("http://download1164.mediafire.com/6t35x5uqu9ng/9c3ubk2ccj502ho/lwjgl64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl64.dll");
+                DownloadManager.downloadFile("http://download1952.mediafire.com/az232bu22rig/n647i19agxn38bh/lwjgl.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "lwjgl.dll");
+                DownloadManager.downloadFile("http://download1521.mediafire.com/9p317s6s5amg/kudba1remdn9aa2/jinput-dx8_64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8_64.dll");
+                DownloadManager.downloadFile("http://download1014.mediafire.com/4kgvib9e9udg/4k6kssfwfhrhx1n/jinput-raw_64.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw_64.dll");
+                DownloadManager.downloadFile("http://download1055.mediafire.com/9l558t9kw1tg/649kkaxb3k5ohp7/jinput-dx8.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-dx8.dll");
+                DownloadManager.downloadFile("http://download1422.mediafire.com/yg6tb3p2gwvg/dpfii0ygj2dhbv1/jinput-raw.dll", Vizun.getDataFolder().getNativesFolder().getAbsolutePath(), "jinput-raw.dll");
             }
-            else if(Vizun.getDataFolder().getOs() == DataFolder.OPERATING_SYSTEM.Linux){
+            else if(Environment.getOperatingSystem() == Environment.OPERATING_SYSTEM.LINUX){
                 //TODO download natives for linux
             }
         }

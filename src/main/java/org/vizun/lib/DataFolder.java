@@ -22,10 +22,10 @@ public class DataFolder {
         this.logger = instance.getLogger();
         assignDirectory();
     }
-    
+
     private void assignDirectory() {
         String OS = System.getProperty("os.name").toLowerCase();
-        
+
         if(OS.contains("win")) {
             operSys = OPERATING_SYSTEM.Windows;
         } else if(OS.contains("mac")) {
