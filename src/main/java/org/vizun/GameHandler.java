@@ -1,6 +1,7 @@
 package org.vizun;
 
 import org.slf4j.Logger;
+
 import org.vizun.engine.Game;
 import org.vizun.engine.display.DisplayManager;
 import org.vizun.engine.loader.Loader;
