@@ -16,7 +16,7 @@ public class GameHandler {
     private static MasterRenderer masterRenderer;
     private static Loader loader;
     private static EntityShader entityShader;
-    
+
     private Logger logger;
     
     public GameHandler(Game main) {
