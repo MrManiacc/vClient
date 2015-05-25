@@ -1,6 +1,5 @@
 package org.vizun.lib;
 
-import com.sun.javafx.tools.resource.DeployResource;
 import org.slf4j.Logger;
 import org.vizun.engine.Game;
 
