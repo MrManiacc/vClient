@@ -1,5 +1,6 @@
 package org.vizun;
 
+import org.lwjgl.Sys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vizun.engine.Game;
