@@ -1,7 +1,5 @@
 package org.vizun.engine.shader;
 
-import com.sun.javafx.geom.Matrix3f;
-
 import org.lwjgl.util.vector.Matrix4f;
 import org.vizun.Vizun;
 
