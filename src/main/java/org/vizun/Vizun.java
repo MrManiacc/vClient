@@ -64,5 +64,9 @@ public class Vizun implements Game {
     public static ResourceLoader getResourceLoader(){
         return resourceLoader;
     }
+
+    public static DataFolder.OPERATING_SYSTEM getOs(){
+        return dataFolder.getOperSys();
+    }
     public static Language getLanguage(){return language;}
 }

@@ -131,4 +131,10 @@ public class DataFolder {
      * @return isDebug Debugged
      */
     public boolean isDebug(){return isDebug;}
+
+    /**
+     * Returns current OS
+     * @return operSystem
+     */
+    public OPERATING_SYSTEM getOperSys(){return operSys;}
 }
