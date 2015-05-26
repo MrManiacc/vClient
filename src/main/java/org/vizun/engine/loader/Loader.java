@@ -17,6 +17,8 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * Created by James on 5/16/2015.
  */
@@ -42,15 +44,13 @@ public class Loader {
      */
     public int loadTexture(String textureName) {
         int texutreId = 0;
+        String fileLocation = (Vizun.getDataFolder().getTextureFolder().getAbsolutePath() + File.separator + textureName + ".png");
         try {
-            texutreId = textureLoader.loadTexture(ImageIO.read(new File("src/main/resources/textures/" + textureName + ".png")));
+           texutreId = textureLoader.loadTexture(ImageIO.read(new File(fileLocation)));
 
-            /*Vizun.getLang().sendTexturedLoaded(textureName); will be re added after River updates json reading */
-            /* TEMP */
             textures.add(texutreId);
         }catch(Exception e){
-            /* Vizun.getLang().sendTextureNotLoaded(textureName); will be re added after River updates json reading */
-            /*TEMP */
+            e.printStackTrace();
         }
         return texutreId;
     }

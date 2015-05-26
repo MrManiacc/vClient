@@ -25,6 +25,9 @@ public class Vizun implements Game {
         resourceLoader = new ResourceLoader(instance);
         resourceLoader.loadNatives();
         resourceLoader.loadConfigurations();
+        resourceLoader.loadShaders();
+        resourceLoader.loadTextures();
+        // Has to be called after because it uses config files, which won't be created until after their loaded and or downloaded.
         gameHandler  = new GameHandler(instance);
         language = new Language(Language.LANGUAGE.ENGLISH);
 

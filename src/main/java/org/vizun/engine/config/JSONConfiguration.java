@@ -116,14 +116,15 @@ public class JSONConfiguration implements Config {
         }
         return stringArray;
     }
+
     public boolean getBoolean(String key){
         return jsonNode.path(key).getBooleanValue();
     }
 
+    public double getDouble(String key) { return jsonNode.path(key).asDouble();}
+
     @Override
-    public float getFloat(String key) {
-        return Float.valueOf(jsonNode.path(key).getTextValue());
-    }
+    public float getFloat(String key) {return (float)(jsonNode.path(key).asDouble());}
     
     @Override
     public Object get(String key) {

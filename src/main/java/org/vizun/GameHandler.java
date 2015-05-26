@@ -1,10 +1,13 @@
 package org.vizun;
 
+import org.lwjgl.util.vector.Vector3f;
 import org.slf4j.Logger;
 
 import org.vizun.engine.Game;
 import org.vizun.engine.config.JSONConfiguration;
 import org.vizun.engine.display.DisplayManager;
+import org.vizun.engine.entities.Camera;
+import org.vizun.engine.entities.Entity;
 import org.vizun.engine.loader.Loader;
 import org.vizun.engine.model.ModelTexture;
 import org.vizun.engine.model.TexturedModel;
@@ -22,7 +25,9 @@ public class GameHandler {
     private static Loader loader;
     private static EntityShader entityShader;
     private static TexturedModel texturedModel;
-    private JSONConfiguration displayConfiguration;
+    private static Entity testingEntity;
+    private static JSONConfiguration displayConfiguration;
+    private static Camera camera;
 
     private Logger logger;
     
@@ -38,7 +43,10 @@ public class GameHandler {
         masterRenderer = new MasterRenderer();
         loader = new Loader();
         entityShader = new EntityShader();
-        texturedModel = new TexturedModel(loader.loadToVao(VoxelData.vertics, VoxelData.indices, VoxelData.textureCoords), new ModelTexture(loader.loadTexture("test")));
+        masterRenderer.start(entityShader);
+        texturedModel = new TexturedModel(loader.loadToVao(VoxelData.vertices, VoxelData.indices, VoxelData.textureCoords), new ModelTexture(loader.loadTexture("BasicBlock")));
+        testingEntity = new Entity(texturedModel, new Vector3f(0,0,-1), new Vector3f(0,0,0), new Vector3f(1,1,1));
+        camera = new Camera();
     }
 
     /**
@@ -54,9 +62,10 @@ public class GameHandler {
      * Called once per a frame inside of the openGL context, which is why there is a "shouldShutDownContext" anything done that needs to be shutdown in openGL
      */
     public void onUpdate() {
+        camera.moveCamera();
         masterRenderer.update();
         entityShader.start();
-        masterRenderer.render(texturedModel);
+        masterRenderer.render(testingEntity, camera);
         entityShader.stop();
         displayManager.updateDisplay();
     }
@@ -77,11 +86,9 @@ public class GameHandler {
         return loader;
     }
 
-    public static EntityShader getEntityShader() {
-        return entityShader;
-    }
-    
     public static Game getInstance() {
         return GameHandler.instance;
     }
+
+    public static JSONConfiguration displayConfig(){return displayConfiguration;}
 }

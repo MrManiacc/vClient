@@ -12,9 +12,12 @@ public class DataFolder {
     private static File data_directory;
     private static File natives_directory;
     private static File config_directory;
+    private static File shader_directory;
+    private static File texture_directory;
+
     private Logger logger;
 
-    private boolean isDebug = false;
+    private boolean isDebug = true;
     
     public enum OPERATING_SYSTEM {Windows, Mac, Linux, Unsupported}
     
@@ -67,10 +70,14 @@ public class DataFolder {
         // Called the same way for every system, so it's called after the data dir is set.
         config_directory = new File(data_directory + File.separator + "config");
         natives_directory = new File(data_directory + File.separator + "natives");
+        shader_directory = new File(data_directory + File.separator + "shaders");
+        texture_directory = new File(data_directory + File.separator + "textures");
         // Checks if folders exist, creates them if not
         makeDataDir(data_directory);
         makeDataDir(natives_directory);
         makeDataDir(config_directory);
+        makeDataDir(shader_directory);
+        makeDataDir(texture_directory);
     }
 
 
@@ -108,6 +115,17 @@ public class DataFolder {
      */
     public File getConfigFolder(){ return config_directory; }
 
+    /**
+     * Returns the shader game directory.
+     * @return Shader Directory
+     */
+    public File getShaderFolder(){return shader_directory;}
+
+    /**
+     * Returns the textures game directory.
+     * @return Texture Directory
+     */
+    public File getTextureFolder() {return texture_directory;}
     /**
      * If current game is in debug mode or not
      * @return isDebug Debugged

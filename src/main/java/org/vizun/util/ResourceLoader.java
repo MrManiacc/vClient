@@ -38,6 +38,15 @@ public class ResourceLoader {
             logger.debug("Configurations downloaded");
         }
     }
+    public void loadTextures(){
+        if (checkTextures(logger))
+            downloadTextures(logger);
+
+        }
+    public void loadShaders(){
+        if(checkShaders(logger))
+            downloadShaders(logger);
+        }
 
     /**
      * Checks to see if the natives need to be downloaded or not
@@ -49,9 +58,17 @@ public class ResourceLoader {
         }
         return true;
     }
-
+    private static boolean checkTextures(Logger logger) {
+        if (Vizun.getDataFolder().getTextureFolder().list().length > 0)
+            return false;
+        return true;
+    }
+    private static boolean checkShaders(Logger logger) {
+        if (Vizun.getDataFolder().getShaderFolder().list().length > 0)
+            return false;
+        return true;
+    }
     private static boolean checkConfig(Logger logger) {
-        // This number is 3 because there is 3 config files, and we want it to make sure there is at least 3 files in the dir. Will do better checking later
         if (Vizun.getDataFolder().getConfigFolder().list().length > 3)
             return false;
         return true;
@@ -102,6 +119,25 @@ public class ResourceLoader {
             logger.error("An error occured while downloading configs");
         } catch (IOException e) {
             logger.error("An error occuerd while write config file to destination");
+        }
+    }
+    private void downloadShaders(Logger logger){
+        try {
+            DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/uyvsuafhmh4qedd/vertexShader.txt?dl=1", Vizun.getDataFolder().getShaderFolder().getAbsolutePath(), "vertexShader.txt");
+            DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/cakrf5znwpyojm1/fragmentShader.txt?dl=1", Vizun.getDataFolder().getShaderFolder().getAbsolutePath(), "fragmentShader.txt");
+        } catch (MalformedURLException e) {
+            logger.error("An error occured while downloading shaders");
+        } catch (IOException e) {
+            logger.error("An error occuerd while write shaders file to destination");
+        }
+    }
+    private void downloadTextures(Logger logger){
+        try {
+            DownloadManager.downloadFile(logger, "https://www.dropbox.com/s/wqat57etnvvvucn/BasicBlock.png?dl=1", Vizun.getDataFolder().getTextureFolder().getAbsolutePath(), "BasicBlock.png");
+         } catch (MalformedURLException e) {
+            logger.error("An error occured while downloading shaders");
+        } catch (IOException e) {
+            logger.error("An error occuerd while write shaders file to destination");
         }
     }
 }
