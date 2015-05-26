@@ -4,6 +4,10 @@ import org.lwjgl.Sys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vizun.engine.Game;
+import  org.vizun.engine.display.Displaymanager;
+import org.vizun.engine.config.Configuration;
+import org.vizun.engine.display.Displaymanager;
+
 import org.lwjgl.opengl.Display;
 import org.vizun.event.EventManager;
 import org.vizun.lib.DataFolder;
@@ -17,8 +21,6 @@ public class Vizun implements Game {
     private static DataFolder dataFolder;
     
     private static EventManager eventManager = new EventManager(instance);
-
-
 
     public static void main(String[] args){
 
