@@ -1,20 +1,15 @@
 package org.vizun.engine.config;
 
 import com.fasterxml.jackson.core.*;
-import org.apache.commons.io.FileUtils;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.vizun.Vizun;
-import org.vizun.GameHandler;
+import org.vizun.engine.GameHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import com.fasterxml.jackson.core.TreeNode;
-import org.vizun.util.ResourceLoader;
-
-import java.util.Map;
 
 /**
  * Created by River on 5/17/2015.

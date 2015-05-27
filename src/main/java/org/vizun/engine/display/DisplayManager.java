@@ -43,6 +43,8 @@ public class DisplayManager {
      * updates the openGL graphics
      */
     public void updateDisplay() {
+        GL11.glClearColor(0.63f, 1, 0.73f,1);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
         org.lwjgl.opengl.Display.sync(maxFps);
         org.lwjgl.opengl.Display.update();
     }

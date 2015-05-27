@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vizun.engine.Game;
 import org.lwjgl.opengl.Display;
-import org.vizun.engine.config.JSONConfiguration;
+import org.vizun.engine.GameHandler;
 import org.vizun.lib.DataFolder;
 import org.vizun.util.Language;
 import org.vizun.util.ResourceLoader;
