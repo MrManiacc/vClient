@@ -45,6 +45,9 @@ public class Vizun implements Game {
             }
         }.run();
 
+        shutdown();
+    }
+    public static void shutdown(){
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             @Override
             public void run() {
@@ -52,19 +55,16 @@ public class Vizun implements Game {
             }
         }));
     }
-
     @Override
     public Logger getLogger() {
         return LoggerFactory.getLogger("org.vizun");
     }
-
     public static DataFolder getDataFolder() {
         return dataFolder;
     }
     public static ResourceLoader getResourceLoader(){
         return resourceLoader;
     }
-
     public static DataFolder.OPERATING_SYSTEM getOs(){
         return dataFolder.getOperSys();
     }
