@@ -11,9 +11,15 @@ public class DataFolder {
     
     private static File data_directory;
     private static File natives_directory;
+    private static File config_directory;
+    private static File shader_directory;
+    private static File texture_directory;
+
     private Logger logger;
+
+    private boolean isDebug = true;
     
-    public static enum OPERATING_SYSTEM {Windows, Mac, Linux, Unsupported}
+    public enum OPERATING_SYSTEM {Windows, Mac, Linux, Unsupported}
     
     private OPERATING_SYSTEM operSys;
     
@@ -25,43 +31,53 @@ public class DataFolder {
 
     private void assignDirectory() {
         String OS = System.getProperty("os.name").toLowerCase();
-
-        if(OS.contains("win")) {
-            operSys = OPERATING_SYSTEM.Windows;
-        } else if(OS.contains("mac")) {
-            operSys = OPERATING_SYSTEM.Mac;
-        } else if(OS.contains("nix") || OS.contains("nux") || OS.contains("aix") || OS.contains("linux")) {
-            operSys = OPERATING_SYSTEM.Linux;
-        } else {
-            operSys = OPERATING_SYSTEM.Unsupported;
+            if(OS.contains("win")) {
+                operSys = OPERATING_SYSTEM.Windows;
+            } else if(OS.contains("mac")) {
+                operSys = OPERATING_SYSTEM.Mac;
+            } else if(OS.contains("nix") || OS.contains("nux") || OS.contains("aix") || OS.contains("linux")) {
+                operSys = OPERATING_SYSTEM.Linux;
+            } else {
+                operSys = OPERATING_SYSTEM.Unsupported;
+            }
+        if(!isDebug){
+            switch (operSys) {
+                case Windows:
+                    data_directory = new File(System.getenv("APPDATA") + "/Vizun");
+                    logger.debug("Data Directory set to windows: {}", data_directory);
+                    break;
+                case Linux:
+                    data_directory = new File(System.getProperty("user.home") + "/.Vizun");
+                    logger.debug("Data Directory set to linux: {}", data_directory);
+                    break;
+                case Mac:
+                    data_directory  = new File(System.getProperty("user.home") + "/Library/Application Support/Vizun");
+                    logger.debug("Data Directory set to OSX: {}", data_directory);
+                    break;
+                case Unsupported:
+                default:
+                    //Unsupported operating systems will receive no support.
+                    data_directory = new File(System.getProperty("user.home") + "/.Vizun");
+                    logger.debug("Data Directory set to Unsupported OS: {}", data_directory);
+                    logger.warn("Unsupported operating system. Attempting to use Data Directory: {}", data_directory);
+                    break;
+            }
+        }else{
+            // Used for in game project testing
+            data_directory = new File("src/main/resources");
+            logger.debug("Data Directory set to DEBUG: {}", data_directory);
         }
-        
-        switch (operSys) {
-            case Windows:
-                data_directory = new File(System.getenv("APPDATA") + "/Vizun");
-                natives_directory = new File(data_directory + File.separator + "windows-natives");
-                logger.debug("Data Directory set to Windows: {}", data_directory);
-                break;
-            case Linux:
-                data_directory = new File(System.getProperty("user.home") + "/.Vizun");
-                natives_directory = new File(data_directory + File.separator + "linux-natives");
-                logger.debug("Data Directory set to Linux: {}", data_directory);
-                break;
-            case Mac:
-                data_directory  = new File(System.getProperty("user.home") + "/Library/Application Support/Vizun");
-                natives_directory = new File(data_directory + File.separator + "mac-natives");
-                logger.debug("Data Directory set to OSX: {}", data_directory);
-                break;
-            case Unsupported:
-            default:
-                //Unsupported operating systems will receive no support.
-                data_directory = new File(System.getProperty("user.home") + "/.Vizun");
-                logger.debug("Data Directory set to Unsupported OS: {}", data_directory);
-                logger.warn("Unsupported operating system. Attempting to use Data Directory: {}", data_directory);
-                break;
-        }
+        // Called the same way for every system, so it's called after the data dir is set.
+        config_directory = new File(data_directory + File.separator + "config");
+        natives_directory = new File(data_directory + File.separator + "natives");
+        shader_directory = new File(data_directory + File.separator + "shaders");
+        texture_directory = new File(data_directory + File.separator + "textures");
+        // Checks if folders exist, creates them if not
         makeDataDir(data_directory);
         makeDataDir(natives_directory);
+        makeDataDir(config_directory);
+        makeDataDir(shader_directory);
+        makeDataDir(texture_directory);
     }
 
 
@@ -70,6 +86,7 @@ public class DataFolder {
      */
     private void makeDataDir(File file){
         if(!file.isDirectory()){
+            logger.debug(file.getAbsolutePath() + " doesn't exsist, making it at {}", file);
             logger.debug("Data Directory doesn't exist, making it at: {}", file);
             file.mkdir();
             logger.debug("Successfully created {}", file);
@@ -91,4 +108,33 @@ public class DataFolder {
     public File getNativesFolder(){
         return natives_directory;
     }
+
+    /**
+     * Returns the config game directory.
+     * @return Config Directory
+     */
+    public File getConfigFolder(){ return config_directory; }
+
+    /**
+     * Returns the shader game directory.
+     * @return Shader Directory
+     */
+    public File getShaderFolder(){return shader_directory;}
+
+    /**
+     * Returns the textures game directory.
+     * @return Texture Directory
+     */
+    public File getTextureFolder() {return texture_directory;}
+    /**
+     * If current game is in debug mode or not
+     * @return isDebug Debugged
+     */
+    public boolean isDebug(){return isDebug;}
+
+    /**
+     * Returns current OS
+     * @return operSystem
+     */
+    public OPERATING_SYSTEM getOperSys(){return operSys;}
 }

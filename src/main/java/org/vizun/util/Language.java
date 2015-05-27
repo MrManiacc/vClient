@@ -1,12 +1,22 @@
 package org.vizun.util;
 
 import org.vizun.engine.config.Config;
+import org.vizun.engine.config.JSONConfiguration;
+
+import java.io.File;
 
 public class Language {
-  private Config config;
-  
-  public Language(Config config){
-    this.config = config;
+  private JSONConfiguration config;
+  public static enum LANGUAGE {ENGLISH, SPANISH, GERMAN};
+
+  public Language(LANGUAGE language){
+      if(language == LANGUAGE.ENGLISH){
+        this.config = new JSONConfiguration("english.json");
+      }else if(language == LANGUAGE.SPANISH){
+          this.config = new JSONConfiguration("spanish.json");
+      }else if(language == LANGUAGE.GERMAN){
+          this.config = new JSONConfiguration("german.json");
+      }
   }
   
   /**
@@ -41,7 +51,13 @@ public class Language {
   public String getTextureNotLoadedMessage() {
     return config.getString("TEXTURE_NOT_FOUND");
   }
-  
+
+    /**
+     * public String to send the title of the game. Used later on to show version possibly
+     * @return TITLE
+     */
+  public String getTitle(){return this.config.getString("TITLE");}
+
   /**
    *  prints out a new line with the prefix in front of the string
    *  Example: [Vizun] - Hello world.
@@ -65,12 +81,12 @@ public class Language {
   public void sendTexturedLoaded(String textureName){
     sendPrefixedMessage(getTextureLoadedMessage() + textureName + ".png");
   }
-  
+
   /**
    *  Errors out the texture name when texture is not found and populates error with the prefeix
    *  Example: [Vizun] - [Texture not found]: test.png
    */
-  
+
   public void sendTextureNotLoaded(String textureName){
     sendPrefixedErrorMessage(getTextureNotLoadedMessage() + textureName + ".png");
   }
